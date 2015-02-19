@@ -6,6 +6,7 @@ Middleware and page manager for single page web app and mobile app.
 ## Getting started
 
 ```js
+var Page = require('page');
 var page = new Page();
 
 // Middleware executed only one time
