@@ -1,56 +1,45 @@
 
-# Translate
+# Page
 
-Basic translate library for browser.
+Middleware and page manager for single page web app and mobile app.
 
 ## Getting started
 
 ```
-var translate = require('translate');
-var translations = {
-	'default': {
-		'it_IT': {
-			"%s records founded in the table": "Ho trovato %s record nella tabella",
-			"...": "..."
-		}
-	},
-	'error': {
-		'it_IT': {
-			"User denied geolocation": "Negato l'accesso al GPS",
-			"...": "..."
-		}
-	}
-};
-translate.setTranslations(translations);
-translate.setLocale('it_IT');
+var page = new Page();
 
-// Load other libraries language files
-// Ex. require('moment-it');
-
-```
-
-When you call setLocale() an `change:locale` event will be triggered.
-
-```
-translate.on('change:locale', function (newLocale) {
-	console.log('New locale: ' + newLocale);
+// Middleware executed only one time
+page.use(function (context, next) {
+	context.foo = 'bar';
+	next();
 });
+
+// URL executed at every address change
+page.url('*', function (context, next) {
+	if (context.foo != 'bar')
+		return next(new Error('Comething goes wrong'));
+	next();
+});
+
+// URL accessible from the browser address bar
+page.url({ url: 'customers/:id', name: 'customers' }, function (context, next) {
+	console.log(context.foo); // print 'bar'
+	next();
+});
+
+// Multiple functions called in waterfall
+page.url('profile', BasicAuth.ensureAuthenticated(), function (context, next) {
+	// If I'm not logged in this code wont be executed
+	console.log(context.user);
+	next();
+});
+
+page.start();
+
+
+// Somewhere else in the code...
+var context = require('context');
+console.log(context.foo); // print 'bar'
+
 ```
 
-## __(msg [, ...])
-
-Returns translated string matched in the *default* namespace. From the second argument it works like `sprintf`.
-
-```
-translate.__('%s records founded in the table', 150);
-// Output: Ho trovato 150 record nella tabella
-```
-
-## __n(namespace, msg)
-
-Returns translated string matched in the specified namespace. From the second argument it works like `sprintf`.
-
-```
-translate.__n('error', 'User denied geolocation');
-// Output: Negato l'accesso al GPS
-```
