@@ -1,6 +1,6 @@
 {
   "name": "page-utils",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "PubSub for the browser",
   "main": "lib/Page.js",
   "scripts": {
@@ -18,10 +18,10 @@
     "utils"
   ],
   "contributors": [
-    { "name" : "Matteo Baggio", 
+    { "name" : "Matteo Baggio",
       "email" : "matteo.baggio@gmail.com"
     },
-    { "name" : "Michele Belluco", 
+    { "name" : "Michele Belluco",
       "email" : "michele@belluco.info"
     }
   ],
