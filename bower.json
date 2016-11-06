@@ -1,6 +1,6 @@
 {
   "name": "page-utils",
-  "version": "1.0.2",
+  "version": "2.0.2",
   "homepage": "https://github.com/SonoIo/page-utils",
   "description": "Middleware utils for browser",
   "main": "lib/Page.js",
