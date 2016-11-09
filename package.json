@@ -1,6 +1,6 @@
 {
   "name": "page-utils",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "PubSub for the browser",
   "main": "lib/Page.js",
   "scripts": {
